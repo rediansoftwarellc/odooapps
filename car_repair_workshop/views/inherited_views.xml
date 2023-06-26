@@ -1,0 +1,47 @@
+<odoo>
+    <record id="subscription_form_view_inherit" model="ir.ui.view">
+        <field name="name">Quatation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']"
+                   position="attributes">
+                <attribute name="string">Quatation Date</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/
+                field[@name='qty_delivered']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/
+                field[@name='qty_invoiced']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/
+                field[@name='product_id']"
+                   position="before">
+                <field name="license_plate"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/
+                field[@name='license_plate']"
+                   position="before">
+                <field name="model"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']"
+                   position="after">
+                <field name="car_repair_origin"/>
+            </xpath>
+            <xpath expr="//sheet/div" position="inside">
+                <button class="oe_stat_button" type="object" name="get_work_order"
+                        icon="oi-studio--filled">
+                    <field string="WO" name="work_count" widget="statinfo"/>
+                </button>
+                <button class="oe_stat_button" type="object" name="get_repair_order"
+                        icon="oi-studio--filled">
+                    <field string="RO" name="repair_order_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

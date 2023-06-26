@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--     Server action of cancel sale order-->
+    <record id="action_all_in_one_cancellation_id" model="ir.actions.server">
+        <field name="name">Cancel Order</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+                                                                                                                                                                                                                                                 <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.cancel_all_sale_order()
+        </field>
+    </record>
+
+    <!--     Server action of cancel sale order and set it to draft-->
+    <record id="action_cancel_and_draft_id" model="ir.actions.server">
+        <field name="name">Cancel and Reset Draft</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.cancel_and_draft_sale_order()
+        </field>
+    </record>
+
+    <!--    Server action of sale cancel and delete the sale order-->
+<!--    <record id="action_cancel_and_delete_id" model="ir.actions.server">-->
+<!--        <field name="name">Cancel and Delete Order</field>-->
+<!--        <field name="model_id" ref="sale.model_sale_order"/>-->
+<!--        <field name="binding_model_id" ref="sale.model_sale_order"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">-->
+<!--            for record in records:-->
+<!--                record.cancel_and_delete_sale_order()-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <!--     Server action of cancel purchase order-->
+    <record id="action_all_in_one_cancellation_purchase_id" model="ir.actions.server">
+        <field name="name">Cancel Purchase Order</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.cancel_all_purchase_order()
+        </field>
+    </record>
+
+     <!--     Server action of cancel purchase order and set it to draft-->
+     <record id="action_purchase_cancel_and_draft_id" model="ir.actions.server">
+        <field name="name">Cancel and Reset Draft</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.cancel_and_draft_purchase_order()
+        </field>
+    </record>
+
+     <!--    Server action of purchase cancel and delete the purchase order-->
+<!--    <record id="action_purchase_cancel_and_delete_id" model="ir.actions.server">-->
+<!--        <field name="name">Cancel and Delete Purchase Order</field>-->
+<!--        <field name="model_id" ref="purchase.model_purchase_order"/>-->
+<!--        <field name="binding_model_id" ref="purchase.model_purchase_order"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">-->
+<!--            for record in records:-->
+<!--                record.cancel_and_delete_purchase_order()-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

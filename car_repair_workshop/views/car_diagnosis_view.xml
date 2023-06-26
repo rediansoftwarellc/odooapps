@@ -1,0 +1,165 @@
+<odoo>
+    <record id="car_diagnosis_form" model="ir.ui.view">
+        <field name="name">Diagnosis.form</field>
+        <field name="model">car.diagnosis</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="diagnosis_status" widget="statusbar"/>
+                    <button name="assign_tech" string="Assign Technician" type="object" class="btn-primary"
+                            attrs="{'invisible':[('diagnosis_status','!=','draft')]}"  groups="car_repair_workshop.group_head_technician,car_repair_workshop.group_directore_commercial"/>
+                    <button name="create_quatation" string="Create Quatation" type="object" class="btn-primary"
+                            attrs="{'invisible':[('diagnosis_status','!=','in_progress')]}"  groups="car_repair_workshop.group_service_manager,car_repair_workshop.group_directore_commercial"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" type="object" name="get_quatation"
+                                icon="oi-studio--filled">
+                            <field string="Quatation" name="quatation_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="refe"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="subject1"/>
+                            <field name="technician"/>
+                            <field name="repair_ref"/>
+                        </group>
+                        <group>
+                            <field name="priority1"/>
+                            <field name="date_of_reciept1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="General">
+                                <group string="Client Info">
+                                    <group>
+                                        <field name="client1"/>
+                                        <label for="address1"/>
+                                        <div class="oe_address_formate">
+                                            <field name="address1" placeholder="address"/>
+                                            <field name="state1" placeholder="State"/>
+                                            <field name="pincode1" placeholder="Pincode"/>
+                                            <field name="country1" placeholder="Country"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="email_id1"/>
+                                        <field name="mobile_no1"/>
+                                        <field name="phone_no1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                    <group string="Car Info">
+                        <notebook>
+                            <page string="Details">
+                                <field name="fleet_info_line" string="Fleet Info">
+                                    <form>
+                                        <header>
+                                            <field name="car_status1" widget="statusbar"/>
+                                            <button name="enter_result" type="object" string="Enter Result"
+                                                    class="btn-primary"
+                                                    attrs="{'invisible':[('car_status1','!=','draft')]}" groups="car_repair_workshop.group_head_technician,car_repair_workshop.group_directore_commercial"/>
+                                        </header>
+                                        <sheet>
+
+                                            <group>
+                                                <group>
+                                                    <field name="car1"/>
+                                                    <field name="chassis_no1"/>
+                                                    <field name='license_plate1'/>
+                                                </group>
+                                                <group>
+                                                    <field name="model1"/>
+                                                    <field name="fuel_type1"/>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="Service Details">
+                                                    <group>
+                                                        <group>
+
+                                                            <field name="under_guarantee1" widget="radio"/>
+                                                            <field name="gaurantee_type1" widget="radio"/>
+
+                                                        </group>
+                                                        <group>
+                                                            <field name="service_nature1"/>
+                                                        </group>
+                                                    </group>
+                                                </page>
+                                                <page string="Diagnosis Report"
+                                                      attrs="{'invisible':[('test1','!=',True)]}">
+                                                    <group>
+                                                        <field name="estm_serv_hr" style="width:30%"/>
+                                                        <field name="service_product" style="width:30%"/>
+                                                        <field name="service_product_price" style="width:30%"/>
+                                                    </group>
+                                                    <field name="test1" invisible="1"/>
+                                                </page>
+                                            </notebook>
+
+                                            <group string="Spare Part" attrs="{'invisible':[('test1','!=',True)]}">
+                                                <notebook>
+                                                    <page string="Spare Parts">
+                                                        <field name="product_line">
+                                                            <tree editable="top">
+                                                                <field name="spare_product"/>
+                                                                <field name="spare_quantity"/>
+                                                                <field name="spare_unit_price"/>
+                                                            </tree>
+                                                        </field>
+                                                    </page>
+                                                </notebook>
+                                            </group>
+                                            <group string="Diagnosis Result"
+                                                   attrs="{'invisible':[('test1','!=',True)]}"/>
+                                            <field name="service_details1" attrs="{'invisible':[('test1','!=',True)]}"/>
+                                        </sheet>
+                                    </form>
+                                    <tree>
+                                        <field name="car1"/>
+                                        <field name="model1"/>
+                                        <field name="chassis_no1"/>
+                                        <field name='license_plate1'/>
+                                        <field name="fuel_type1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="car_diagnosis_tree" model="ir.ui.view">
+        <field name="name">Diagnosis.tree</field>
+        <field name="model">car.diagnosis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="subject1"/>
+                <field name="technician"/>
+                <field name="priority1"/>
+                <field name="date_of_reciept1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="car_diagnosis_action" model="ir.actions.act_window">
+        <field name="name">Car Diagnosis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">car.diagnosis</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="help" type="html">
+            <p class="sale3_view">Create your Car Diagnosis here.</p>
+        </field>
+    </record>
+    <menuitem name="Car Diagnosis" id="root_car_d" parent="root_car1" action="car_diagnosis_action"/>
+
+</odoo>

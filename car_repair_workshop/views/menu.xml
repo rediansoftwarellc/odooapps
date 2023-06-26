@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem name="Billing" id="billing_rooot" parent="root_car" sequence="2"/>
+<menuitem name="Quatation" action="sale.action_quotations_with_onboarding" id="quatation1" parent="billing_rooot"/>
+    <menuitem name="Invoices" action="account.action_move_out_invoice_type" id="invoice1" parent="billing_rooot"/>
+    <menuitem name="Spare Parts" id="spare_root" parent="root_car5" action="sale.product_template_action"/>
+  <menuitem name="Vehicle" id="vehicle1" parent="root_car5" action="fleet.fleet_vehicle_action"/>
+</odoo>

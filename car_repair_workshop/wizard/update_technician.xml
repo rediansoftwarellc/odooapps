@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="assign_technician_wizard_form" model="ir.ui.view">
+        <field name="name">assign_technician.form</field>
+        <field name="model">assign.technician</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                     <field name="technician1"/>
+                    </group>
+                </sheet>
+                <footer>
+                  <button name="technician_update" type="object" string="Assign Technician" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+    <record id="assign_technician_wizard_action" model="ir.actions.act_window">
+        <field name="name">Assign Technician</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">assign.technician</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

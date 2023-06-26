@@ -1,0 +1,40 @@
+<odoo>
+    <record id="car_checklist_form" model="ir.ui.view">
+        <field name="name">Repair.checklists</field>
+        <field name="model">car.checklist</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="cheklists_name"/>
+                            <field name="created_by" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+    <record id="car_checklist_tree" model="ir.ui.view">
+        <field name="name">Repair.checklist</field>
+        <field name="model">car.checklist</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cheklists_name"/>
+                <field name="created_by"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="car_checklist_action" model="ir.actions.act_window">
+        <field name="name">Car Checklist</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">car.checklist</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="help" type="html">
+            <p class="sale3_view">Create your Car checklist here.</p>
+        </field>
+    </record>
+    <menuitem name="Checklists" id="checklist_1" parent="root_car5" action="car_checklist_action"/>
+</odoo>

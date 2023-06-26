@@ -1,0 +1,138 @@
+<odoo>
+    <record id="car_repair_form" model="ir.ui.view">
+        <field name="name">Repair.form</field>
+        <field name="model">car.repair</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="repair_status" widget="statusbar"/>
+                    <button name="create_diagnosis" string="Create Car Diagnosis" type="object" class="btn-primary"
+                            attrs="{'invisible':[('repair_status','in','[(quatation,approve quatation,work_in_progress,done,in diagnosis)]')]}"
+                            groups="car_repair_workshop.group_service_manager,car_repair_workshop.group_directore_commercial"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" type="object" name="get_diagnosis"
+                                icon="oi-studio--filled">
+                            <field string="Diagnosis" name="diagnosis_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="ref"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="subject"/>
+                            <field name="assigned_to"/>
+                        </group>
+                        <group>
+                            <field name="priority"/>
+                            <field name="date_of_reciept"/>
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="General">
+                                <group string="Client Info">
+                                    <group>
+                                        <field name="client"/>
+                                        <label for="address"/>
+                                        <div class="oe_address_formate">
+                                            <field name="address" placeholder="address"/>
+                                            <field name="state" placeholder="State"/>
+                                            <field name="pincode" placeholder="Pincode"/>
+                                            <field name="country" placeholder="Country"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="email_id"/>
+                                        <field name="mobile_no"/>
+                                        <field name="phone_no"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Service Repair Checklists">
+                                <field name="checklist_line">
+                                    <tree editable="top">
+                                        <field name="name"/>
+                                        <field name="created_by1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </group>
+                    <group string="Car Info"/>
+                    <field name="car_info_line" string="Car Info">
+                        <form>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="car"/>
+                                        <field name="chassis_no"/>
+                                        <field name='license_plate'/>
+                                    </group>
+                                    <group>
+                                        <field name="model"/>
+                                        <field name="fuel_type"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Service Details">
+                                        <group>
+                                            <group>
+                                                <field name="under_guarantee" widget="radio"/>
+                                                <field name="gaurantee_type" widget="radio"/>
+                                            </group>
+                                            <group>
+                                                <field name="service_nature"/>
+                                            </group>
+                                        </group>
+                                    </page>
+                                </notebook>
+                                <group string="Service Details"></group>
+                                <field name="service_details"/>
+                            </sheet>
+                        </form>
+                        <tree>
+                            <field name="car"/>
+                            <field name="model"/>
+                            <field name="chassis_no"/>
+                            <field name='license_plate'/>
+                            <field name="fuel_type"/>
+                            <field name="service_nature"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="car_repair_tree" model="ir.ui.view">
+        <field name="name">Repair.tree</field>
+        <field name="model">car.repair</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="subject"/>
+                <field name="assigned_to"/>
+                <field name="priority"/>
+                <field name="date_of_reciept"/>
+            </tree>
+        </field>
+    </record>
+    <record id="car_repair_action" model="ir.actions.act_window">
+        <field name="name">Car Repair</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">car.repair</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="help" type="html">
+            <p class="sale3_view">Create your Car Repair order here.</p>
+        </field>
+    </record>
+    <menuitem name="Car Repair" id="root_car"/>
+    <menuitem name="Configuration" id="root_car5" sequence="3" parent="root_car"/>
+    <menuitem name="Car Repair" id="root_car1" parent="root_car" sequence="1"
+              groups="car_repair_workshop.group_head_technician,car_repair_workshop.group_technician,car_repair_workshop.group_directore_commercial,car_repair_workshop.group_service_manager"/>
+    <menuitem name="Car Repair" id="root_car2" parent="root_car1" action="car_repair_action"/>
+</odoo>
