@@ -9,7 +9,7 @@
                 Car repair services V14.0
     """,
 
-    'author':"Redian Software pvt.ltd",
+    'author':"Redian Software",
     'website': "http://www.rediansoftware.com",
     'category': 'Extra Tools',
     'version': '0.1',
@@ -23,7 +23,7 @@
     # always loaded
     'license': 'LGPL-3',
     'currency': 'USD',
-    'price': '25.0',
+    'price': '99.0',
     'category': 'Feet',
     'data': [
          'security/ir.model.access.csv',

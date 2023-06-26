@@ -23,11 +23,11 @@
     'version': '14.0.0.1',
     'category': 'Generic Modules',
     'sequence':-111,
-    'author':  "Redian Software pvt.ltd",
+    'author':  "Redian Software",
     'website': "https://www.rediansoftware.com/",
     'license': 'LGPL-3',
     'currency': 'USD',
-    'price': '15.0',
+    'price': '99.0',
    
     'name': "Whatsapp Massage",
 
