@@ -9,7 +9,7 @@
     'price': '27.0',
     'website': 'https://www.rediansoftware.com/',
     'ref': 'https://apps.odoo.com/apps/modules/16.0/bi_warranty_registration/',
-    'depends': ['product', 'sales_warranty', 'account'],
+    'depends': ['product', 'sale', 'account'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
