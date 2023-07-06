@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_student_id_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row mt32 mb32">
+                            <div class="col-auto col-3 mw-100 mb-2">
+                                <strong>Customer Address</strong><br/>
+                                <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot; &quot;email&quot;], &quot;no_marker&quot;: True}"/>
+                                <p t-if="o.partner_id"/>
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2">
+                                <strong>Warranty Team</strong><br/>
+                                <p><span t-esc="o.warranty_team.name"/></p>
+                                <p><b>Tags: </b><span t-esc="o.warranty_type"/> warranty, <span t-esc="o.product.warranty_period"/> warranty</p>
+                            </div>
+                            <div class="col-auto col-3 mw-100 mb-2"><strong></strong></div>
+                            <div class="col-auto col-3 mw-100 mb-2"><strong></strong></div>
+                        </div><br/>
+                        <div class="row mt32 mb32">
+                            <div class="col-auto col-12 mw-100 mb-2"><h3><span t-esc="o.name"/></h3></div>
+                        </div>
+                        <div class="row mt32 mb32">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">Product</th>
+                                      <th scope="col">Model No</th>
+                                      <th scope="col">Serial No</th>
+                                      <th scope="col">Warranty Start Date</th>
+                                      <th scope="col">Warranty End Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                      <td><span t-esc="o.product.name"/></td>
+                                      <td><span t-esc="o.model"/></td>
+                                      <td><span t-esc="o.serial_no"/></td>
+                                      <td><span t-esc="o.warranty_start_date"/></td>
+                                      <td><span t-esc="o.warranty_end_date"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="footer">
+                            <table width="100%">
+                                <tr>
+                                    <td width="70%">
+                                        <table width="100%">
+                                            <tr><td align="left"><b>Signature Of Reception</b></td></tr>
+                                        </table>
+                                    </td>
+                                    <td width="30%">
+                                        <table width="100%">
+                                            <tr><td align="right"><b>Signature Of Customer</b></td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_student_id_card" model="ir.actions.report">
+       <field name="name">Warranty Product</field>
+       <field name="model">product.warranty</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">product_warranty.report_student_id_card</field>
+       <field name="report_file">product_warranty.report_student_id_card</field>
+       <field name="binding_model_id" ref="product_warranty.model_product_warranty"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_order_line_inherit_id" model="ir.ui.view">
+        <field name="name">sale.order.line.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="serial_number"/>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']/form/group/group[1]/field[@name='product_id']" position="after">
+                <field name="serial_number"/>
+            </xpath>
+            <xpath expr="//button[@class='oe_stat_button'][1]" position="after">
+                <button name="check_warranty" type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                        attrs="{'invisible': [('warranty_count', '=', 0)]}">
+                    <field name="warranty_count" widget="statinfo" string="Warranty"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_form_view_id" model="ir.ui.view">
+        <field name="name">product.template.product.website.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@class='oe_title']/div[@name='options']" position="inside">
+                <div>
+                    <field name="take_warranty"/>
+                    <label for="take_warranty"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='barcode']" position="after">
+                <field name="merchant"/>
+            </xpath>
+           <xpath expr="//field[@name='merchant']" position="after">
+                <field name="serial_number"/>
+            </xpath>
+            <xpath expr="//field[@name='serial_number']" position="after">
+                <field name="model"/>
+            </xpath>
+            <xpath expr="//page[@name='variants']" position="after">
+                <page string="Warranty Details">
+                    <group>
+                        <group>
+                            <field name="under_warranty"/>
+                            <field name="warranty_period"/>
+                            <br/><br/><br/><br/><br/><br/>
+<!--                            <field name="create_warranty_sales_order"/>-->
+                            <field name="create_warranty_sales_order" groups="product_warranty.group_create_warranty_so"/>
+                        </group>
+                        <group>
+                            <field name="allow_renewal"/>
+                            <field name="allow_warranty_renewal_times"/>
+                            <field name="warranty_renewal_periods"/>
+                            <field name="warranty_renewal_cost"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_product_form_view_id" model="ir.ui.view">
+        <field name="name">product.product.product.website.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[@class='oe_title']/div[@name='options']" position="inside">
+                <div>
+                    <field name="take_warranty"/>
+                    <label for="take_warranty"/>
+                </div>
+            </xpath>
+            <xpath expr="//page[@name='purchase']" position="before">
+                <page string="Warranty Details">
+                    <group>
+                        <group>
+                            <field name="under_warranty"/>
+                            <field name="warranty_period"/>
+                        </group>
+                        <group>
+                            <field name="allow_renewal"/>
+                            <field name="allow_warranty_renewal_times"/>
+                            <field name="warranty_renewal_periods"/>
+                            <field name="warranty_renewal_cost"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

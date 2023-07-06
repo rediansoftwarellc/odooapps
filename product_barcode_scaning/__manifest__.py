@@ -1,0 +1,15 @@
+{
+    'name': 'Product Barcode Scanning',
+    'summary': 'Product Barcode Scanning',
+    'version': '14.0',
+    'currency': 'USD',
+    'price': '27.0',
+    'sequence': -145,
+    'depends': ['sale_management', 'purchase', 'stock'],
+    'author': 'Redian Software Pvt. Ltd.',
+    'description': """Barcode Scanning""",
+    'data': ['views/views.xml'],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

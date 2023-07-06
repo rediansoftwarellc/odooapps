@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="delivery_timeslot_config_tree_view">
+            <field name="name">delivery.timeslot.config.tree.view</field>
+            <field name="model">delivery.timeslot.config</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="time_from" widget="float_time"/>
+                    <field name="time_to" widget="float_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_delivery_timeslot_config" model="ir.actions.act_window">
+            <field name="name">Time Slots</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">delivery.timeslot.config</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem id="menu_delivery_timeslot_config_id" parent="website.menu_website_global_configuration"
+                  name="TimeSlots" action="action_delivery_timeslot_config" sequence="33"/>
+
+        <record model="ir.ui.view" id="delivery_timeslot_setting_form_view">
+            <field name="name">delivery.timeslot.setting.form.view</field>
+            <field name="model">delivery.timeslot.setting</field>
+            <field name="arch" type="xml">
+                <form>
+        	        <sheet>
+                        <div>
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+	                    <group name="timeslot" string="Timeslot To Display on Website">
+	          		        <field name="timeslot_ids" nolabel="1" colspan="4"></field>
+	                    </group>
+                        <group name="disable_timeslot_by_day" string="Disable Timeslot By Day on Website">
+                            <field name="disable_timeslot_by_day_ids" nolabel="1" colspan="4">
+                                <tree editable="bottom">
+                                    <field name="d_day"/>
+                                    <field name="dis_timeslots_ids" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group name="disable_timeslot_by_date" string="Disable Timeslot By Date on Website">
+	          		        <field name="disable_timeslot_by_date_ids" nolabel="1" colspan="4">
+		                        <tree editable="bottom">
+		              	            <field name="disable_on_date"/>
+		              	            <field name="dis_timeslot_ids" widget="many2many_tags"/>
+		                        </tree>
+		                    </field>
+	                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="delivery_timeslot_setting_tree_view">
+            <field name="name">delivery.timeslot.setting.tree.view</field>
+            <field name="model">delivery.timeslot.setting</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_delivery_timeslot_setting" model="ir.actions.act_window">
+	        <field name="name">Delivery Setting</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="res_model">delivery.timeslot.setting</field>
+	        <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_delivery_settings" parent="website.menu_website_global_configuration" sequence="3"
+                  name="Delivery Timeslot Configuration" action="action_delivery_timeslot_setting"/>
+    </data>
+</odoo>

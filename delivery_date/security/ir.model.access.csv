@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_delivery_timeslot_config,delivery.timeslot.config,model_delivery_timeslot_config,,1,1,1,1
+access_delivery_timeslot_setting,delivery.timeslot.setting,model_delivery_timeslot_setting,,1,1,1,1
+access_disable_timeslot_by_date,disable.timeslot.by.date,model_disable_timeslot_by_date,,1,1,1,1
+access_disable_timeslot_by_day,disable.timeslot.by.day,model_disable_timeslot_by_day,,1,1,1,1

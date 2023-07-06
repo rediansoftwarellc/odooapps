@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="warranty_renewal_view_id" model="ir.ui.view">
+        <field name="name">warranty.renewal.wizard.view</field>
+        <field name="model">warranty.renewal</field>
+        <field name="arch" type="xml">
+            <form string="Warranty Renewal">
+                <sheet>
+                    <group col="4">
+                        <field name="product_id" required="1" domain="[('take_warranty', '=', True)]"/>
+                        <field name="serial_no" readonly="1"/>
+                        <field name="partner_id" required="1"/>
+                        <field name="renewal_amount"/>
+                        <field name="warranty_id" readonly="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="RENEW WARRANTY" type="object" name="renew_warranty" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" class="btn btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_warranty_renewal" model="ir.actions.act_window">
+        <field name="name">Warranty Renewal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">warranty.renewal</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

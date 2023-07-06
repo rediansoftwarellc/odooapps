@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <!-- Subscription Form View -->
+        <record id="view_subscription_form" model="ir.ui.view">
+            <field name="name">subscription.subscription.form</field>
+            <field name="model">subscription.subscription</field>
+            <field name="arch" type="xml">
+                <form string="Subscription">
+                    <sheet>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                        </group>
+                        <notebook>
+                            <page string="Subscription Lines">
+                                <field name="subscription_lines" mode="tree,kanban">
+                                    <tree>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Subscription Tree View -->
+        <record id="view_subscription_tree" model="ir.ui.view">
+            <field name="name">subscription.subscription.tree</field>
+            <field name="model">subscription.subscription</field>
+            <field name="arch" type="xml">
+                <tree string="Subscriptions">
+                    <field name="start_date"/>
+                    <field name="duration"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Subscription Action -->
+        <record id="action_subscription" model="ir.actions.act_window">
+            <field name="name">Subscriptions</field>
+            <field name="res_model">subscription.subscription</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Subscription Menu -->
+        <menuitem id="menu_subscription" name="Subscriptions" action="action_subscription"/>
+    </data>
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="warranty_tags_form_view" model="ir.ui.view">
+        <field name="name">warranty.tags.form</field>
+        <field name="model">warranty.tags</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="warranty_tags_tree_view_id" model="ir.ui.view">
+        <field name="name">warranty.tags.tree</field>
+        <field name="model">warranty.tags</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_warranty_tags" model="ir.actions.act_window">
+        <field name="name">Product Warranty Tags Details</field>
+        <field name="res_model">warranty.tags</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="category_form_view" model="ir.ui.view">
+        <field name="name">category.form</field>
+        <field name="model">category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="category_tree_view_id" model="ir.ui.view">
+        <field name="name">category.tree</field>
+        <field name="model">category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_category_id" model="ir.actions.act_window">
+        <field name="name">Category</field>
+        <field name="res_model">category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Configuration" id="sub_menu_configuration_ids5" parent="menu_product_warranty_ids"
+              sequence="6"/>
+     <menuitem name="Tags" id="sub_sub_menu_configuration_ids5" parent="sub_menu_configuration_ids5"
+              action="action_warranty_tags" sequence="6"/>
+
+    <menuitem name="Claim" id="menu_claim_id" parent="product_warranty.sub_menu_configuration_ids5" sequence="12"/>
+    <menuitem name="Categories" id="menu_categories_id" parent="menu_claim_id" sequence="1" action="action_category_id"/>
+</odoo>

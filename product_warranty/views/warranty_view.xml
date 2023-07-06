@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_move_inherit_id" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="receipt"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_warranty_form_view_id" model="ir.ui.view">
+        <field name="name">product.warranty.form</field>
+        <field name="model">product.warranty</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_invoices" string="Create Invoice" type="object"
+                            attrs="{'invisible': [('state', '!=', 'to_be_invoice')]}"/>
+                    <button name="button_action" string="Confirm" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                    <button name="%(product_warranty.action_warranty_renewal)d" string="Warranty Expired" type="action"
+                            attrs="{'invisible': [('state', '!=', 'expired')]}" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="new,under_warranty,to_be_invoice,invoiced,to_be_renew,expired"/>
+                </header>
+                <sheet>
+                    <group>
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </group>
+                    <group string="CUSTOMER">
+                        <group>
+                            <field name="partner_id" widget="res_partner_many2one" options='{"always_reload": True}'
+                                   context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}"/>
+                            <field name="number"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="warranty_team"/>
+                            <field name="tags"/>
+                            <field name="sales_person"/>
+                            <field name="order_id" readonly="1" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="PRODUCT">
+                        <group>
+                            <field name="product"/>
+                            <field name="serial_no"/>
+                            <field name="model"/>
+                            <field name="merchant"/>
+                            <field name="warranty_type" widget="radio"/>
+                            <field name="renewal_amount" attrs="{'invisible': [('warranty_type', '!=', 'paid')]}"/>
+                        </group>
+                        <group>
+                            <field name="warranty_start_date" readonly="1"/>
+                            <field name="warranty_end_date" />
+                            <field name="no_of_renew"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Warranty History">
+                            <field name="warranty_history" mode="tree" readonly="1">
+                                <tree string="History">
+                                    <field name="current_date"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="r_amount"/>
+                                    <field name="warranty_type"/>
+                                    <field name="warranty_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Claim History">
+                            <field name="claim_history" mode="tree" readonly="1">
+                                <tree string="Claim History">
+                                    <field name="name"/>
+                                    <field name="claim_date"/>
+                                    <field name="partner"/>
+                                    <field name="product"/>
+                                    <field name="serial_no"/>
+                                    <field name="state"/>
+                                    <field name="warranty_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="product_warranty_tree_view_id" model="ir.ui.view">
+        <field name="name">product.warranty.tree</field>
+        <field name="model">product.warranty</field>
+        <field name="arch" type="xml">
+            <tree decoration-success="state == 'under_warranty'" decoration-danger="state == 'expired'" decoration-bf="state == 'expired'" decoration-muted="state == 'new'" decoration-it="state == 'new'" decoration-primary="state == 'to_be_renew'">
+                <field name="partner_id"/>
+                <field name="number"/>
+                <field name="name"/>
+                <field name="product"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_warranty" model="ir.actions.act_window">
+        <field name="name">Product Warranty</field>
+        <field name="res_model">product.warranty</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="warranty_claim_form_view_id" model="ir.ui.view">
+        <field name="name">Warranty Claims</field>
+        <field name="model">warranty.claims</field>
+        <field name="arch" type="xml">
+            <form string="Warranty Claims">
+                <header>
+                    <button name="submit_claim" string="Submit" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '=', 'under_maintenance')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="claim_date"/>
+                        <field name="responsible"/>
+                        <field name="priority" widget="priority"/>
+                        <field name="sales_team"/>
+                        <field name="deadline"/>
+                    </group>
+                    <notebook>
+                        <page string="Claim Description">
+                            <separator string="CLAIM REPORTER"/><hr/>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                                <field name="product_id"/>
+                                <field name="serial_no"/>
+                            </group>
+                            <separator string="RESPONSIBILITIES"/><hr/>
+                            <group>
+                                <field name="trouble_responsible"/>
+                                <field name="category"/>
+                            </group>
+                            <separator string="ROOT CAUSES"/><hr/>
+                            <field name="description"/>
+                            <separator string="CLAIM/ACTION DESCRIPTION"/><hr/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="warranty_claim_tree_view_id" model="ir.ui.view">
+        <field name="name">Warranty Claims</field>
+        <field name="model">warranty.claims</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="claim_date"/>
+                <field name="responsible"/>
+                <field name="priority"/>
+                <field name="sales_team"/>
+                <field name="deadline"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_warranty_claims" model="ir.actions.act_window">
+        <field name="name">Claims</field>
+        <field name="res_model">warranty.claims</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--  Action for warranty expired  -->
+    <record id="action_product_warranty_expired" model="ir.actions.act_window">
+        <field name="name">Warranty Expired</field>
+        <field name="res_model">product.warranty</field>
+        <field name="domain">[('state', '=', 'expired')]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--  Action for warranty to be renew  -->
+    <record id="action_product_warranty_to_be_renew" model="ir.actions.act_window">
+        <field name="name">Warranty To Be Renew</field>
+        <field name="res_model">product.warranty</field>
+        <field name="domain">[('state', '=', 'to_be_renew')]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Product Warranty" id="menu_product_warranty_ids" sequence="1"/>
+    <menuitem name="Warranty" id="product_warranty_ids" parent="menu_product_warranty_ids"
+              action="action_product_warranty"
+              sequence="2"/>
+    <menuitem name="Warranty Invoices" id="sub_menu_warranty_invoice_ids2" parent="menu_product_warranty_ids"
+              action="action_product_warranty"
+              sequence="3"/>
+    <menuitem name="Warranty Products" id="sub_menu_warranty_product_ids3" parent="menu_product_warranty_ids"
+              action="action_product_warranty" sequence="4"/>
+
+    <menuitem name="Warranty Claims" id="sub_menu_warranty_claims_ids4" parent="menu_product_warranty_ids"
+              sequence="5"/>
+    <menuitem name="Warranty Claims" id="sub_menu_warranty_claims" parent="sub_menu_warranty_claims_ids4"
+              sequence="1"/>
+    <menuitem name="Claims" id="sub_menu_claims" parent="sub_menu_warranty_claims" sequence="2"
+              action="action_warranty_claims"/>
+
+<!--    <menuitem name="Settings" id="submenu_setting_id" parent="product_warranty.sub_menu_configuration_ids5"-->
+<!--              action="action_warranty_setting" sequence="11"/>-->
+
+<!--    <menuitem name="Categories" id="menu_categories_id" parent="menu_claim_id" action="action_warranty_setting"-->
+<!--              sequence="13"/>-->
+<!--    <menuitem name="Stages" id="menu_stages_id" parent="menu_claim_id" action="action_warranty_setting"-->
+<!--              sequence="14"/>-->
+
+    <menuitem name="Warranty Registration" id="sub_menu_warranty_registration" parent="product_warranty_ids"
+              action="action_product_warranty" sequence="1"/>
+    <menuitem name="Warranty Expired" id="sub_menu_warranty_expired" parent="product_warranty_ids"
+              action="action_product_warranty_expired" sequence="2"/>
+    <menuitem name="Warranty To Be Renew" id="sub_menu_warranty_renew" parent="product_warranty_ids"
+              action="action_product_warranty_to_be_renew" sequence="3"/>
+
+    <menuitem name="Warranty Invoices" id="sub_menu_warranty_invoices" parent="sub_menu_warranty_invoice_ids2"
+              action="action_product_warranty" sequence="1"/>
+
+    <!--  Action for product template  -->
+    <record id="action_inherit_product_template_id" model="ir.actions.act_window">
+        <field name="name">Product Template</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('take_warranty', '=', True)]</field>
+        <field name="view_id" ref="product.product_template_tree_view"/>
+    </record>
+
+    <menuitem name="Products" id="sub_menu_products" parent="sub_menu_warranty_product_ids3"
+              action="action_inherit_product_template_id" sequence="1"/>
+</odoo>

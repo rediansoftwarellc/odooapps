@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.product.warranty,access_product_warranty,model_product_warranty,,1,1,1,1
+access.warranty.tags,access_warranty_tags,model_warranty_tags,,1,1,1,1
+access.warranty.team,access_warranty_team,model_warranty_team,,1,1,1,1
+
+access_warranty_renewal,warranty.renewal,model_warranty_renewal,,1,1,1,1
+access_warranty_claims,warranty.claims,model_warranty_claims,,1,1,1,1
+access_category,category,model_category,,1,1,1,1
+access_claim_claim,claim.claim,model_claim_claim,,1,1,1,1
+
+access_warranty_renewal_wizard,warranty.renewal.wizard,model_warranty_renewal_wizard,,1,1,1,1
+access_warranty_history,warranty.history,model_warranty_history,,1,1,1,1

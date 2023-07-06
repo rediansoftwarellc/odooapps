@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="product_template_form_view_inherit_id" model="ir.ui.view">
+            <field name="name">product.template.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/div[@class='oe_title']/div[@name='options']" position="inside">
+                    <div>
+                        <field name="is_pack"/>
+                        <label for="is_pack"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="tags"/>
+                    <field name="company"/>
+                    <field name="calculate_price"/>
+                    <field name="pack_price" invisible="1"/>
+                </xpath>
+                <xpath expr="//notebook/page[@name='variants']/field[@name='attribute_line_ids']" position="replace">
+                    <h1>You can't create variants of the pack</h1>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Pack Products" name="pack_product">
+                        <field name="pack_product_ids" mode="tree,form">
+                            <tree editable="top">
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <!--                                    <field name="image" widget="image"/>-->
+                            </tree>
+                            <form>
+                                <field name="product_id"/>
+                                <field name="quantity"/>
+                                <!--                                    <field name="image" widget="image"/>-->
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_product_form_view_inherit_id" model="ir.ui.view">
+            <field name="name">product.product.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/div[@class='oe_title']/div[@name='options']" position="inside">
+                    <div>
+                        <field name="is_pack"/>
+                        <label for="is_pack"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_search_view_inherit_id" model="ir.ui.view">
+            <field name="name">product.template.search.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/filter[@name='filter_to_sell']" position="after">
+                    <filter string="Is a Pack" name="is_pack" domain="[('is_pack', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_product_template_id" model="ir.actions.act_window">
+            <field name="name">Product Packs</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_pack', '=', True)]</field>
+            <field name="view_id" ref="product.product_template_tree_view"/>
+            <field name="search_view_id" ref="product_template_search_view_inherit_id"/>
+        </record>
+
+        <menuitem id="menu_product_pack_id" name="Product Pack" parent="sale.product_menu_catalog"
+                    action="action_product_template_id"/>
+
+        <record id="sale_order_line_inherit_id" model="ir.ui.view">
+            <field name="name">sale.order.line.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='order_lines']/field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('is_pack', '=', True)]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_order_line_inherit_id" model="ir.ui.view">
+            <field name="name">purchase.order.line.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='products']/field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('is_pack', '=', True)]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_config_settings_inherit_form_view_id" model="ir.ui.view">
+            <field name="name">res.config.settings.inherit.view</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="70"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block">
+                        <h2>Allow Bundle Pack on Purchase</h2>
+                        <div class="row mt16 o_settings_container" id="bundle_pack_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="po_order_approval">
+                                <div class="o_setting_left_pane">
+                                    <field name="allow_bundle_pack"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="allow_bundle_pack"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="purchase_stock_move_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='operations']/field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//notebook/page/field/tree/field[@name='forecast_availability']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

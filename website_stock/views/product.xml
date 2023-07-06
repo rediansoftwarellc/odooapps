@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="product_Qty_availability_on_fronted_website" inherit_id="website_sale.products_item">
+            <xpath expr="//form/div[@class='card-body p-1 oe_product_image']" position="before">
+            	<t t-if="product.qty_available &gt; 0">
+                    <div style="background: #2f7734;width:75px;text-align: center;border-radius: 3px;color: white;position: absolute;height: 21px;font-size: 14px;box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);">
+		                In Stock
+	            	</div>
+            	</t>
+            	<t t-if="product.qty_available &lt;= 0">
+                    <div style="background: red;width:90px;text-align: center;border-radius: 3px;color: white;position: absolute;height: 21px;font-size: 14px;box-shadow: 5px 5px 2px 0px rgba(0,0,0,0.75);">
+		                Out of Stock
+	            	</div>
+            	</t>
+            	</xpath>
+            	<xpath expr="//div[@class='product_price']" position="inside">
+            	    <t t-if="product.qty_available &gt; 0">
+            	        <u><span t-esc="product.qty_available" style="margin-left:5px"/> Units Left</u>
+            	    </t>
+                </xpath>
+        </template>
+
+		<template id="product_Qty_availability_on_backend_site" inherit_id="website_sale.product">
+			<xpath expr="//t/div/section/div[2]/div[2]/form/div[@class='js_product js_main_product']/a[@id='add_to_cart']" position="after">
+				<div t-if="product.qty_available &gt; 0" style="width: 170px; height: 40px; text-align: center; color:whitesmoke; line-height: 2.5;
+																border-radius:7px; background-color: rgb(124, 123, 173); margin-top:25px; padding-right:5px; padding-left:5px;">
+	            		<span>Quantity Left </span><span t-field="product.qty_available"/>
+	             </div>
+			</xpath>
+        </template>
+    </data>
+</odoo>

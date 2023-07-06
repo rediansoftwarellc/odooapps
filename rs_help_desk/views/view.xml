@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Help Desk Form View -->
+        <record id="help_desk_form_view_id" model="ir.ui.view">
+            <field name="name">help.desk.form</field>
+            <field name="model">help.desk</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="closed" type="object" string="Closed" class="oe_highlight"
+                                states="draft,start_work,done"/>
+                        <button name="start_work" type="object" string="Start Work" class="oe_highlight"
+                                states="draft"/>
+                        <button name="done" type="object" string="Done" class="oe_highlight" states="pending"/>
+                        <field name="state" widget="statusbar" nolabel="1"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="customer_id"/>
+                                <field name="reason"/>
+                                <field name="note" widget="text" attrs="{'style': 'width: 400px;'}"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="email"/>
+                                <field name="mob"/>
+                                <field name="assign"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Help Desk Tree View -->
+        <record id="help_desk_tree_view_id" model="ir.ui.view">
+            <field name="name">help.desk.tree</field>
+            <field name="model">help.desk</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="state == 'done'" decoration-danger="state == 'closed'"
+                      decoration-warning="state == 'pending'" decoration-info="state == 'draft'">
+                    <field name="customer_id"/>
+                    <field name="note"/>
+                    <field name="reason"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="help_desk_kanban_view_id" model="ir.ui.view">
+            <field name="name">help.desk.kanban</field>
+            <field name="model">help.desk</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_small_column o_your_module_kanban"
+                        quick_create_view="your.module.quick_create_form" archivable="false" sample="1">
+                    <field name="customer_id"/>
+                    <field name="reason"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_content">
+                                <div class="o_kanban_record_title">
+                                    <strong>
+                                        <field name="customer_id"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="reason"/>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="state"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="help_desk_action" model="ir.actions.act_window">
+            <field name="name">Help Desk</field>
+            <field name="res_model">help.desk</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem id="menu_help_desk_main" name="Help Desk" sequence="0"/>
+        <menuitem id="submenu_help_desk" name="Help Desk" sequence="1" parent="menu_help_desk_main"
+                  action="help_desk_action"/>
+    </data>
+</odoo>

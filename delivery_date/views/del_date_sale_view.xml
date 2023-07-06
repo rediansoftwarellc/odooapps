@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="delivery_date_form_view">
+            <field name="name">delivery.date.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group[@name='sale_reporting']" position="after">
+                    <group string="Delivery Information">
+                        <field name="is_config"/>
+                        <field name="delivery_date"/>
+                        <field name="time_slots" invisible="0"/>
+                        <field name="comment" style='max-width: 1130px; width: 400px'/>
+                    </group>
+                </xpath>
+		    </field>
+	    </record>
+
+        <record model="ir.ui.view" id="delivery_time_form_view">
+            <field name="name">delivery.time.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[2]/field[@name='origin']" position="after">
+                    <field name="delivery_time_slots" readonly="0"/>
+                </xpath>
+		    </field>
+	    </record>
+    </data>
+</odoo>

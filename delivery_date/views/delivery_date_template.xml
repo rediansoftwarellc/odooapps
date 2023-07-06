@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="shop">
+		<xpath expr="." position="inside">
+			<script type="text/javascript" src="/delivery_date/static/src/js/delivery_date.js"></script>
+		</xpath>
+	</template>
+
+    <template id="delivery_date_comment" name="Delivery Costs" inherit_id="website_sale_delivery.payment_delivery">
+        <xpath expr="//div[@id='delivery_method'][1]" position="before">
+            <div class="disable-date-backend" t-attf-style ="display: {{disable_date}};">
+                <t t-if="website_sale_order.is_config">
+                    <h5 style="margin-top: 37px; height: 28px"><strong>Delivery Date Time:</strong></h5>
+<!--                    <script>-->
+<!--                        $(function(){-->
+<!--                            if (!Modernizr.inputtypes.date) {-->
+<!--                                $('input[type=date]').datepicker({-->
+<!--                                dateFormat : 'dd-mm-yy'-->
+<!--                            },-->
+<!--                            $.datepicker.regional['it']-->
+<!--                           );-->
+<!--                        }-->
+<!--                    });-->
+<!--                    </script>-->
+                    <div class="input-group datetime">
+                        <input type="date" id="b_date" name="date" placeholder="DD/MM/YYYY" class="form-control" required="True"/>
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
+                    <div style="color:#3c763d; margin-top:9px; display: none;" class="date_alert">
+                        <strong>"Choose a preferable time slots!"</strong>
+                    </div>
+                    <div style="color:#ff0000; margin-top:9px; white-space: nowrap; display: none;" class="currect_date">
+                        <strong>"Please select a greater then or equal to today date!"</strong>
+                    </div>
+                    <div id="display_timeslots" style="margin-bottom: 10px;"/>
+                </t>
+            </div>
+            <t t-if="website_sale_order.is_config">
+                <div class="disable-comment-backend" t-attf-style ="display: {{disable_comment}};">
+                    <h5 style="margin-top :8%; margin-bottom: -5.5%;"><strong>Delivery Comment:</strong></h5>
+                    <textarea id="disable_comment" cols="70" form="usrform" rows="4" placeholder="Write your Comment"
+                              style="margin-top :7%;margin-bottom: 1.5%;border:1px solid #bbbbbb;text-align: justify;/* box-sizing: content-box; */border-radius: 10px;word-wrap:break-word;"></textarea>
+                </div>
+            </t>
+            <div><input type="hidden" name="sale_order" id="sale_order" t-att-value="website_sale_order.id" /></div>
+        </xpath>
+    </template>
+</odoo>
