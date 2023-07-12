@@ -19,25 +19,38 @@
 #
 ##############################################################################
 {
-    'name' : 'Website Stock',
+    'name' : 'Property_Management',
     'version' : '14.0',
     'author' : 'Redian Software',
     'category' : 'Extra Tools',
     'description' : """
 
 """,
-    'summary': 'Notify when stock not available and you can identify stock in or out of stock',
+    "summary":"In this module you can handle all your property Sale , Resale and Rents ",
     'website': "http://www.rediansoftware.com",
     'license': 'LGPL-3',
     'currency': 'USD',
-    'price':   '29.0',
-    'sequence': -200,
-    'depends': ['base'],
-    "data": [
-        'views/product.xml',
+    'price':    '49.0',
+    'sequence': -107,
+    'depends': ['mail'],
+    'qweb': [
+        "static/src/xml/base.xml",
     ],
-    'test': [
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'data/sequence.xml',
+        'views/property_details.xml',
+        'views/tenant.xml',
+        'views/buyer.xml',
+        'views/payment_details.xml',
+        'views/login.xml'
+
+    ],
+    'demo': [
+        'demo/demo.xml',
     ],
     'installable': True,
     'auto_install': False,
 }
+

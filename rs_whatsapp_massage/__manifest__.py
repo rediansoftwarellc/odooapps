@@ -19,7 +19,7 @@
 #                                                                             #
 ###############################################################################
 
-{   'name': 'Whatsapp Massage',
+{   'name': 'Whatsapp Message',
     'version': '14.0.0.1',
     'category': 'Generic Modules',
     'sequence':-111,
@@ -31,10 +31,10 @@
    
     'name': "Whatsapp Massage",
 
-    'summary': """Redian Software Whatsapp Massage to give you  send massages to our partner and send message to customer with details of saleorder and invoice via whatsapp""",
-    'sequence':-111,
+    'summary': """Redian Software Whatsapp Message to give you  send massages to our partner and send message to customer with details of saleorder and invoice via whatsapp""",
+    'sequence':-111
     'description': """
-        Redian Software Whatsapp Massage to give you  send massages to our partner and send message to customer with
+        Redian Software Whatsapp Message to give you  send messages to our partner and send message to customer with
        details of saleorder and invoice via whatsap
     """,
 #--------------------------------------------------------------------------------------    

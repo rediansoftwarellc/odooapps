@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property.select,access.property.select,model_property_select,group_property_manager,1,1,1,1
+access_property.select1,access.property.select1,model_property_select,group_tenant,1,0,0,0
+access_property.select2,access.property.select2,model_property_select,group_buyer,1,0,0,0
+access_property.tenant,access.property.tenant,model_property_tenant,,1,1,1,1
+access_property.buyer,access.property.buyer,model_property_buyer,,1,1,1,1
+access_property.payment.details,access.property.payment.details,model_property_payment_details,,1,1,1,1
+access_property.login,access.property.login,model_property_login,,1,1,1,1
+
+

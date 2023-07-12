@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tenant_search" model="ir.ui.view">
+        <field name="name">tenant.search</field>
+        <field name="model">property.tenant</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="city" string="City" filter_domain="[('city','ilike',self)]"/>
+                <field name="pincode" string="Pincode" filter_domain="[('pincode','ilike',self)]"/>
+                <group expand="1" string="Group by">
+                    <filter name="city" string="City" context="{'group_by':'city'}"/>
+                    <filter name="pincode" string="Pincode" context="{'group_by':'pincode'}"/>
+                    <filter name="state" string="State" context="{'group_by':'state'}"/>
+                    <filter name="country" string="Country" context="{'group_by':'country'}"/>
+                    <filter name="Indian" string="Indian" domain="[('Indian','=',True)]"/>
+                    <filter name="Indian" string="NRI" domain="[('Indian','=',False)]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="tenant_tree" model="ir.ui.view">
+        <field name="name">tenant.tree</field>
+        <field name="model">property.tenant</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="tenant_name"/>
+                <field name="age"/>
+                <field name="contact_no"/>
+                <field name="email"/>
+                <field name="UID"/>
+                <field name="PAN"/>
+                <field name="Indian"/>
+                <field name="address"/>
+                <field name="state"/>
+                <field name="city"/>
+                <field name="pincode"/>
+                <field name="country"/>
+            </tree>
+        </field>
+    </record>
+    <record id="tenant_form" model="ir.ui.view">
+        <field name="name">tenant.form</field>
+        <field name="model">property.tenant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="tenant_name"/>
+                            <field name="age"/>
+                            <field name="contact_no"/>
+                            <field name="email" placeholder="xyz@gmail.com"/>
+                            <field name="UID" placeholder="Enter the Aadhaar no"/>
+                            <field name="PAN" placeholder="Enter the PAN Card no"/>
+                        </group>
+                        <group>
+                            <field name="Indian"/>
+                            <field name="address" placeholder="Full Address"/>
+                            <field name="state" placeholder="Name of the State"/>
+                            <field name="city" placeholder="Name of the City"/>
+                            <field name="pincode"/>
+                            <field name="country" placeholder=" Country Name"
+                                   attrs="{'invisible': [('Indian','=',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="agree"/>
+                        </group>
+                    </group>
+                    <button id="button_confirm1" name="action_open_to_rent" string="TAKE ON RENT"
+                            class="btn-primary"
+                            type="object"
+                            icon="fa-building-o"
+                            confirm="Click OK to Confirm"
+                            style="margin-left:550px;"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="tenant_action" model="ir.actions.act_window">
+        <field name="name">Tenant</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">property.tenant</field>
+        <field name="view_mode">tree,form,search,kanban,graph</field>
+        <field name="help" type="html">
+            <p class="tenant_view">Create Tenant Details.</p>
+        </field>
+    </record>
+    <menuitem id="tenant_root_1" name="Tenant" parent="property_root_2" action="tenant_action"
+              sequence="10"/>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="login_tree" model="ir.ui.view">
+        <field name="name">login.tree</field>
+        <field name="model">property.login</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="already_register"/>
+                <field name="new_user"/>
+                <field name="old_user_name"/>
+                <field name="old_password"/>
+                <field name="email"/>
+                <field name="mobile_no"/>
+                <field name="new_user_name"/>
+                <field name="create_password"/>
+                <field name="confirm_password"/>
+            </tree>
+        </field>
+    </record>
+    <record id="login_form" model="ir.ui.view">
+        <field name="name">login.form</field>
+        <field name="model">property.login</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="already_register" attrs="{'invisible': [('new_user','=',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="new_user" attrs="{'invisible': [('already_register','=',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="old_user_name" attrs="{'invisible': [('already_register','=',False)]}"/>
+                            <field name="old_password" attrs="{'invisible': [('already_register','=',False)]}"/>
+                        </group>
+
+                        <group>
+                            <field name="email" attrs="{'invisible': [('new_user','=',False)]}"/>
+                            <field name="mobile_no" attrs="{'invisible': [('new_user','=',False)]}"/>
+                            <field name="new_user_name" attrs="{'invisible': [('new_user','=',False)]}"/>
+                            <field name="create_password" attrs="{'invisible': [('new_user','=',False)]}"/>
+                            <field name="confirm_password" attrs="{'invisible': [('new_user','=',False )]}"/>
+                        </group>
+                    </group>
+                    <button id="button_confirm2" name="action_to_login" string="LOGIN"
+                            class="btn-primary"
+                            type="object"
+                            icon="fa-building-o"
+                            confirm="Click OK to Confirm"
+                            style="margin-left:150px;" attrs="{'invisible': [('already_register','=',False)]}"/>
+                    <button id="button_confirm3" name="action_to_register" string="REGISTER"
+                            class="btn-primary"
+                            type="object"
+                            icon="fa-building-o"
+
+                            style="margin-left:760px;" attrs="{'invisible': [('new_user','=',False)]}"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="login_action" model="ir.actions.act_window">
+        <field name="name">Login/Registration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">property.login</field>
+        <field name="view_mode">tree,form,search,kanban,graph</field>
+        <field name="help" type="html">
+            <p class="login_view">Go for Login or Registration.</p>
+        </field>
+    </record>
+    <menuitem id="login_root_1" name="Login" parent="property_root" action="login_action"
+              sequence="10"/>
+</odoo>

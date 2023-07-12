@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="property_search" model="ir.ui.view">
+        <field name="name">property.search</field>
+        <field name="model">property.select</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="city" string="City" filter_domain="[('city','ilike',self)]"/>
+                <field name="pincode" string="Pincode" filter_domain="[('pincode','ilike',self)]"/>
+                <filter name="available" string="Available" domain="[('available','=','yes')]"/>
+                <filter name="available" string=" Not available" domain="[('available','=','no')]"/>
+                <filter name="filter_archived" string="Archived" domain="[('active','=',False)]"/>
+                <group expand="1" string="Group by">
+                    <filter name="available" string="Available" context="{'group_by':'available'}"
+                            domain="[('available','=','yes')]"/>
+                    <filter name="available" string=" Not available" context="{'group_by':'available'}"
+                            domain="[('available','=','no')]"/>
+                    <filter name="city" string="City" context="{'group_by':'city'}"/>
+                    <filter name="pincode" string="Pincode" context="{'group_by':'pincode'}"/>
+                    <filter name="state" string="State" context="{'group_by':'state'}"/>
+                    <filter name="country" string="Country" context="{'group_by':'country'}"/>
+                    <filter name="Indian" string="Indian" domain="[('Indian','=',True)]"/>
+                    <filter name="Indian" string="NRI" domain="[('Indian','=',False)]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="property_tree" model="ir.ui.view">
+        <field name="name">property.tree</field>
+        <field name="model">property.select</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="available=='no'" decoration-success="available_for=='rental'"
+                  decoration-info="available_for=='sale'">
+                <field name="name"/>
+                <field name="property_name"/>
+                <field name="owner_name"/>
+                <field name="contact_no"/>
+                <field name="email"/>
+
+                <field name="available"/>
+                <field name="status" optional="hide"/>
+                <field name="available_for"/>
+                <field name="property_type"/>
+                <field name="flat"/>
+
+                <!--                <field name="monthly_rent"/>-->
+                <!--                <field name="yearly_rent"/>-->
+                <!--                <field name="total_area"/>-->
+                <!--                <field name="price_perFT"/>-->
+                <!--                <field name="sale_price"/>-->
+
+                <field name="Indian"/>
+                <field name="address"/>
+                <field name="state"/>
+                <field name="city"/>
+                <field name="pincode"/>
+                <field name="country"/>
+            </tree>
+        </field>
+    </record>
+    <record id="property_form" model="ir.ui.view">
+        <field name="name">property.form</field>
+        <field name="model">property.select</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name='name' readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="property_name" placeholder="Name of the House"/>
+                            <field name="owner_name"/>
+                            <field name="contact_no"/>
+                            <field name="email" placeholder="xyz@gmail.com"/>
+                        </group>
+                        <group>
+                            <field name="available" placeholder="Yes or No"/>
+                            <field name="status"
+                                   attrs="{'invisible': [('available','=','yes')],'required':[('available','=','no')]}"
+                                   placeholder="Booked/Sold"/>
+                            <field name="available_for"
+                                   attrs="{'invisible': [('available','=','no')],'required':[('available','=','yes')] }"
+                                   placeholder="Check Availability"/>
+                            <field name="property_type" attrs="{'invisible': [('available','=','no')],
+                            'required':['|',('available_for','=','rental'),('available_for','=','sale')]}"
+                                   placeholder="Select Type"/>
+                            <field name="flat"
+                                   attrs="{'invisible': ['|','|',('property_type','=','bungalow'),
+                                   ('property_type','=','villa'), ('available','=','no')],
+                                   'required':[('property_type','=','flat')] }" placeholder="BHK"/>
+                        </group>
+                        <group>
+                            <field name="monthly_rent"/>
+                            <field name="yearly_rent"/>
+                            <field name="total_area"/>
+                            <field name="price_perFT"/>
+                            <field name="sale_price"/>
+                        </group>
+                        <group>
+                            <field name="Indian"/>
+                            <!--                            <div class="oe_address_format">-->
+                            <field name="address" placeholder="Full Address"/>
+                            <field name="state" placeholder="Name of the State"/>
+                            <field name="city" placeholder="Name of the City"/>
+                            <field name="pincode"/>
+                            <field name="country" placeholder="Country Name"
+                                   attrs="{'invisible': [('Indian','=',True)]}"/>
+                            <!--                            </div>-->
+                        </group>
+                        <group>
+                            <field name="image"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <button id="button_confirm" name="action_open_rental" string="Click for Rental"
+                            class="btn-primary" available_for='rental'
+                            type="object"
+                            icon="fa-building-o"
+                            confirm="If You Want to Take on Rent, Please Provide The Details Of The Tenants First!!!.."
+                            style="margin-left:300px;"
+                            groups="01__property__management.group_tenant"/>
+                    <button id="button_confirm" name="action_open_buyer" string="Want to Buy"
+                            class="btn-primary" available_for='sale'
+                            type="object"
+                            icon="fa-building-o"
+                            confirm="If You Want to Buy, Please Provide The Details Of The Buyer First!!!.."
+                            style="margin-left:300px;"
+                            groups="01__property__management.group_buyer"/>
+                </sheet>
+                <!--                added the chatter-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="property_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">property.select</field>
+        <field name="view_mode">tree,form,search,kanban,graph</field>
+        <field name="help" type="html">
+            <p class="property_view">Create your Property Details.</p>
+        </field>
+    </record>
+    <menuitem id="property_root" name="Property" sequence="10"/>
+    <menuitem id="property_root_1" name="Property List" parent="property_root" action="property_action"
+              sequence="10"/>
+    <menuitem id="property_root_2" name="Customer" parent="property_root"
+              sequence="10"/>
+</odoo>
