@@ -32,7 +32,7 @@
     'name': "Whatsapp Massage",
 
     'summary': """Redian Software Whatsapp Message to give you  send massages to our partner and send message to customer with details of saleorder and invoice via whatsapp""",
-    'sequence':-111
+    'sequence':-111,
     'description': """
         Redian Software Whatsapp Message to give you  send messages to our partner and send message to customer with
        details of saleorder and invoice via whatsap
