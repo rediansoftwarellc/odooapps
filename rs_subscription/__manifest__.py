@@ -19,18 +19,18 @@
 #
 ##############################################################################
 {
-    'name' : ' Sale Warranty',
+    'name' : ' Subscription Management',
     'version' : '14.0',
     'author' : 'Redian Software',
     'category' : 'Extra Tools',
     'description' : """
 
 """,
-    'summary': 'This app related to Create warranty, update product warranty, warranty status by saleorder',
+    'summary': 'This app related to Subscription of given product',
     'website': "http://www.rediansoftware.com",
     'license': 'LGPL-3',
     'currency': 'USD',
-    'price':    '35.0',
+    'price':    '10',
     'sequence': -200,
     'depends': ['base'],
     'data': [
