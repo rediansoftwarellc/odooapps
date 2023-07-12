@@ -29,7 +29,7 @@
     "summary":"Using this module you can get the appointment from doctor with date and Time !",
     'website': "http://www.rediansoftware.com",
     'currency': 'USD',
-    'price':    '27.0',
+    'price':    '29.0',
     'license': 'LGPL-3',
     'sequence': -107,
     'depends': ['mail','product'],

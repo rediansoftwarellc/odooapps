@@ -29,7 +29,7 @@
     "summary":"You can create product directly throgh the Barcode No.!",
     'website': "http://www.rediansoftware.com",
     'currency': 'USD',
-    'price': '27.0',
+    'price': '29.0',
     'license': 'LGPL-3',
     'sequence': -145,
     'depends': ['sale_management', 'purchase', 'stock'],
