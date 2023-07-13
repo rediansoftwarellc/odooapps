@@ -36,6 +36,9 @@
     'data':['views/views.xml'],
     'qweb' : [
     ],
+    'images': [
+        'static/description/scanner.mp4'
+    ],
     'test': [
     ],
     'installable': True,
