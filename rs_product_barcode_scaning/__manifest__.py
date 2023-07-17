@@ -37,7 +37,7 @@
     'qweb' : [
     ],
     'images': [
-        'static/description/scanner.mp4'
+        'static/description/template_banner.png'
     ],
     'test': [
     ],
