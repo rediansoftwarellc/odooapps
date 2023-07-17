@@ -32,7 +32,7 @@
     'currency': 'USD',
     'price':    '49.0',
     'sequence': -200,
-    'depends': ['product', 'sale_management', 'account'],
+    'depends': ['product', 'sales_warranty', 'account'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
@@ -47,7 +47,7 @@
     'qweb' : [
     ],
     'images': [
-        '/static/description/icon.png',
+        'static/description/banner.png'
     ],
     'test': [
     ],

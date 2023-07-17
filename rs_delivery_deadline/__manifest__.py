@@ -38,6 +38,9 @@
     ],
     'qweb' : [
     ],
+    'images': [
+        'static/description/banner.png'
+    ],
     'test': [
     ],
     'installable': True,
