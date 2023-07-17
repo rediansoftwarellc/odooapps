@@ -32,7 +32,7 @@
     'currency': 'USD',
     'price':    '49.0',
     'sequence': -200,
-    'depends': ['product', 'sales_warranty', 'account'],
+    'depends': ['product', 'account'],
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
