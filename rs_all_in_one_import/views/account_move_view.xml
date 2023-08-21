@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="account_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_info']" position="inside">
+                    <group>
+                        <group string="Custom field">
+                            <field name="partner_name"/>
+                            <field name="color"/>
+                            <field name="boolean"/>
+                            <field name="amount"/>
+                            <field name="notes"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_color_form" model="ir.ui.view">
+            <field name="name">partner.color.form</field>
+            <field name="model">account.partner.color</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_partner_color_tree" model="ir.ui.view">
+            <field name="name">partner.color.tree</field>
+            <field name="model">account.partner.color</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="partner_color_action" model="ir.actions.act_window">
+            <field name="name">Partner Color</field>
+            <field name="res_model">account.partner.color</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_color_ids" name="Color" action="partner_color_action" sequence="60"
+                  parent="account.menu_finance_configuration"/>
+    </data>
+</odoo>
+
+

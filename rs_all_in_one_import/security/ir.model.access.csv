@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_partner_color,partner.color,model_partner_color,base.group_user,1,1,1,1
+access_import_sale_order,import.sale.order,model_import_sale_order,base.group_user,1,1,1,1
+
+access_import_purchase_order,import.purchase.order,model_import_purchase_order,base.group_user,1,1,1,1
+
+access_import_bom,import.bom,model_import_bom,base.group_user,1,1,1,1
+
+access_import_account_move,import.account.move,model_import_account_move,base.group_user,1,1,1,1
+access_account_partner_color,account.partner.color,model_account_partner_color,base.group_user,1,1,1,1
+
+access_import_stock_picking,import.stock.picking,model_import_stock_picking,base.group_user,1,1,1,1

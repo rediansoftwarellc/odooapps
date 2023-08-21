@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="mrp_form_inherit" model="ir.ui.view">
+            <field name="name">mrp.bom.inherit</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='miscellaneous']" position="inside">
+                    <group string="Custom field" col="4">
+                        <field name="partner_name"/>
+                        <field name="color"/>
+                        <field name="boolean"/>
+                        <field name="amount"/>
+                        <field name="notes"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

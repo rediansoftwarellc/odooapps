@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="import_sale_order_wizard_form" model="ir.ui.view">
+        <field name="name">import.sale.order.form</field>
+        <field name="model">import.sale.order</field>
+        <field name="arch" type="xml">
+            <form string="Import Sale Order">
+                <sheet>
+                    <field name="flag" invisible="1"/>
+                    <group>
+                        <group attrs="{'invisible':[('flag','=',True)]}">
+                            <field name="file_type" widget="radio"/>
+                            <field name="file" filename="filename"/>
+                        </group>
+                        <group attrs="{'invisible':[('flag','=',True)]}">
+                            <field name="stage_option" widget="radio"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible':[('flag','=',True)]}">
+                        <field name="sequence_option" string="Sequence Option"/>
+                        <field name="import_product_by" widget="radio"/>
+                    </group>
+                    <group attrs="{'invisible':[('flag','=',False)]}">
+                        <field name="filename" invisible="1" readonly="1"/>
+                        <field name="file_xls" filename="filename"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <div class="oe_form_buttons">
+                        <div style="float: left;">
+                            <button name="import_sale_order" string="Import" type="object" class="oe_highlight"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </div>
+                        <div style="float: right;">
+                            <label string="Download Sample :" for="file" class="o_form_label"
+                                   style="font-weight: bold; font-size: 16px;"/>
+                            <span style="margin-right: 10px;"></span>
+                            <button string="CSV File" type="object" class="oe_highlight" name="export_csv_sale_order"
+                                    icon="fa-download"/>
+                            <span style="margin-right: 10px;"></span>
+                            <button string="Excel File" type="object" class="oe_highlight" name="export_sale_order"
+                                    icon="fa-download"/>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_sale_order" model="ir.actions.act_window">
+        <field name="name">Import Sale Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.sale.order</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_import_sale_order" name="Import Sale Order" sequence="7" parent="sale.menu_sales_config"
+              action="action_import_sale_order"/>
+</odoo>

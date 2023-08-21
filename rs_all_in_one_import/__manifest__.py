@@ -1,0 +1,28 @@
+{
+    'name': "All In One Import",
+    'version': '14.0',
+    'sequence': -109,
+    'summary': ''' All In One import ''',
+    'description': "All In One import for sales, purchase, inventory and invoice",
+    'author': 'Redian Software Pvt. Ltd.',
+    'website': 'https://www.rediansoftware.com/',
+    'depends': ['base', 'sale_management', 'purchase', 'mrp', 'account', 'stock'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/sale_order_view.xml',
+        'views/purchase_order_view.xml',
+        'views/mrp_import_view.xml',
+        'views/account_move_view.xml',
+        'views/stock_picking_view.xml',
+        'wizard/import_sale_order_view.xml',
+        'wizard/import_purchase_order_view.xml',
+        'wizard/import_bom_view.xml',
+        'wizard/import_account_move_view.xml',
+        'wizard/import_stock_picking_view.xml',
+    ],
+    "support": "keshavpal100@gmail.com",
+    "license": "OPL-1",
+    'installable': True,
+    'application': False,
+    'auto_install': False
+}

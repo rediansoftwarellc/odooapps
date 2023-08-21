@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_order_inherit_id" model="ir.ui.view">
+        <field name="name">sale.order.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_information']/group[2]" position="after">
+                <group>
+                    <group name="custom_field" string="Custom Fields">
+                        <label for="x_partner_id" string="Partner Name"/>
+                        <div name="x_partner_id_div" class="o_row">
+                            <field name="x_partner_id"/>
+                        </div>
+<!--                        <label for="x_partner_ids" string="Colors"/>-->
+<!--                        <div name="x_partner_ids_div" class="o_row">-->
+<!--                            <field name="x_partner_ids" widget="many2many_tags"/>-->
+<!--                        </div>-->
+                        <label for="x_color" string="Color"/>
+                        <div name="x_color_div" class="o_row">
+                            <field name="x_color"/>
+                        </div>
+                        <label for="x_bool" string="Boolean"/>
+                        <div name="x_bool_div" class="o_row">
+                            <field name="x_bool"/>
+                        </div>
+                        <label for="x_amount" string="Amount"/>
+                        <div name="x_amount_div" class="o_row">
+                            <field name="x_amount"/>
+                        </div>
+                        <label for="x_notes" string="Notes"/>
+                        <div name="x_notes_div" class="o_row">
+                            <field name="x_notes"/>
+                        </div>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="uom_id"/>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']/form/group/group[1]/field[@name='product_id']" position="after">
+                <field name="uom_id"/>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']/tree/field[@name='price_subtotal']" position="before">
+                <field name="discount"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="partner_color_form_view" model="ir.ui.view">
+        <field name="name">partner.color.form</field>
+        <field name="model">partner.color</field>
+        <field name="arch" type="xml">
+            <form string="Partner Color">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="partner_color_tree_view" model="ir.ui.view">
+        <field name="name">partner.color.tree</field>
+        <field name="model">partner.color</field>
+        <field name="arch" type="xml">
+            <tree string="Partner Color">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_partner_color" model="ir.actions.act_window">
+        <field name="name">Partner Color</field>
+        <field name="res_model">partner.color</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_partner_color_id" name="Partner Color" sequence="22" parent="sale.menu_sale_config"
+              action="action_partner_color"/>
+</odoo>
