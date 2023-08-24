@@ -40,6 +40,9 @@
         'wizard/import_account_move_view.xml',
         'wizard/import_stock_picking_view.xml',
     ],
+    'images': [
+        'static/description/banner.png'
+    ],
     'license': 'LGPL-3',
     'currency': 'USD',
     'price': '49.0',
